@@ -41,12 +41,30 @@ for countrycode in country_codes:
             channelTitle = data['items'][i]['snippet']['channelTitle']
             categoryId = listdict[data['items'][i]['snippet']['categoryId']]
             video_duration = isodate.parse_duration(data['items'][i]['contentDetails']['duration']).total_seconds()
-            licensedContent = data['items'][i]['contentDetails']['licensedContent']
-            viewCount = data['items'][i]['statistics']['viewCount']
-            likeCount = data['items'][i]['statistics']['likeCount']
-            dislikeCount = data['items'][i]['statistics']['dislikeCount']
-            favoriteCount = data['items'][i]['statistics']['favoriteCount']
-            commentCount = data['items'][i]['statistics']['commentCount']
+            try:
+                licensedContent = data['items'][i]['contentDetails']['licensedContent']
+            except KeyError:
+                licensedContent =''
+            try:
+                viewCount = data['items'][i]['statistics']['viewCount']
+            except KeyError:
+                viewCount =''
+            try:
+                likeCount = data['items'][i]['statistics']['likeCount']
+            except KeyError:
+                likeCount = ''
+            try:
+                dislikeCount = data['items'][i]['statistics']['dislikeCount']
+            except KeyError:
+                dislikeCount = ''
+            try:
+                favoriteCount = data['items'][i]['statistics']['favoriteCount']
+            except KeyError:
+                favoriteCount =''
+            try:
+                commentCount = data['items'][i]['statistics']['commentCount']
+            except KeyError:
+                commentCount = ''
             category_details = []
             try: #category_details
                 for a in range(len(data['items'][i]['topicDetails']['topicCategories'])):
@@ -55,7 +73,7 @@ for countrycode in country_codes:
             except KeyError:
                 category_details = []
             row = countrycode,id,title,channelTitle,YT_id,categoryId,category_details,publishedAt,viewCount,likeCount,dislikeCount,favoriteCount,commentCount,video_duration,licensedContent
-            with open(r'yt_trending_vids.csv', 'a', newline='',
+            with open(r'C:\Users\Admin\Desktop\YouTube\Trending\yt_trending_vids.csv', 'a', newline='',
                       encoding="utf-8") as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerow(row)
