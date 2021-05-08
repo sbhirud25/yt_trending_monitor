@@ -73,7 +73,7 @@ for countrycode in country_codes:
             except KeyError:
                 category_details = []
             row = countrycode,id,title,channelTitle,YT_id,categoryId,category_details,publishedAt,viewCount,likeCount,dislikeCount,favoriteCount,commentCount,video_duration,licensedContent
-            with open(r'C:\Users\Admin\Desktop\YouTube\Trending\yt_trending_vids.csv', 'a', newline='',
+            with open(r'yt_trending_vids.csv', 'a', newline='',
                       encoding="utf-8") as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerow(row)
